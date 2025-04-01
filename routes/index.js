@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+
+const port = process.env.PORT || 4000;
 // Fix the code so is is a list not a shopping list, also add a delete secion and a search function on the home screen
 let currentlistItem = [
   {
