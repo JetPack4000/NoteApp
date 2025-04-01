@@ -1,0 +1,42 @@
+<%- include('layout'); %>
+    <title>Edit Note</title>
+    <link rel="stylesheet" href="/stylesheets/edit.css">
+    <h1>Edit Note</h1>
+
+    <body>
+        <div>
+            <form method="post" action="/update/<%= note.id %>">
+                <label>Title:</label>
+                <input type="text" name="title" value="<%= note.title %>" required />
+
+                <label for="options">Choose an option:</label>
+                <select id="options" name="color">
+                    <% const colors=['yellow', 'blue' , 'green' , 'red' , 'purple' , 'orange' ]; %>
+                        <% colors.forEach(function(color) { %>
+                            <option value="<%= color %>" <%=color===note.color ? 'selected' : '' %>>
+                                <%= color.charAt(0).toUpperCase() + color.slice(1) %>
+                            </option>
+                            <% }); %>
+                </select>
+                <label>Body:</label>
+                <textarea name="body" required style="height:200px"><%= note.body %></textarea>
+                <input type="submit" />
+
+            </form>
+            <script>
+                // Save notes to local storage
+                function saveNotesToLocalStorage(notes) {
+                    localStorage.setItem('notes', JSON.stringify(notes));
+                }
+
+                // Load notes from local storage
+                function loadNotesFromLocalStorage() {
+                    const notes = localStorage.getItem('notes');
+                    return notes ? JSON.parse(notes) : [];
+                }
+
+            </script>
+        </div>
+    </body>
+
+    </html>

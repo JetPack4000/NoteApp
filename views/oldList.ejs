@@ -1,0 +1,49 @@
+<%- include('layout'); %>
+    <title>
+        <%= title %>>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/viewList.css">
+    </head>
+    <style>
+        .contact {
+            padding: 10px;
+            border-radius: 1px;
+            border-style: solid, black;
+        }
+    </style>
+
+    <body>
+        <nav class ="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/mylist">Notes</a></li>
+                <li><a  href="/additem">New Note</a></li>
+                <li><a class = 'active' href="/oldlist">Old Notes</a></li>
+            </ul>
+        </nav>
+        <h1>Todays date <%= currentDate %>
+        </h1>
+
+        <div class="notes-container">
+            <!-- Starred Notes Section -->
+            <h2 class="starornot">Old Notes</h2>
+            <div class="notes">
+                <% data.forEach((note) => { %>
+                    
+                        <div class="note" style="background-color: <%= note.color %>;">
+                            <div class="note-content">
+                                <div class="note-header">
+                                    <h2 class="note-title"><%= note.title %></h2>
+                                    <!-- <label for="note-<%= note.id %>">Done?</label> -->
+                                    <input type="checkbox" class="note-checkbox" <% if (note.done) { %> checked <% } %> >
+                                </div>
+                                <p class="note-body"><%= note.body %></p>
+                                <p class="timestamp">Last updated: <%= note.updatedAt %></p>
+                            </div>
+                        </div>
+
+                <% }) %>
+            </div>
+        </div>
+    </body>
+</html>

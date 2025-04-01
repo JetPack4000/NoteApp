@@ -1,0 +1,107 @@
+<%- include('layout'); %>
+    <title>
+        <%= title %>>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/viewList.css">
+    </head>
+    <style>
+        .contact {
+            padding: 10px;
+            border-radius: 1px;
+            border-style: solid;
+            border-color: black;
+        }
+    </style>
+
+    <body>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a class='active' href="/mylist">Notes</a></li>
+                <li><a href="/additem">New Note</a></li>
+                <li><a href="/oldlist">Old Notes</a></li>
+            </ul>
+        </nav>
+        <h1>Todays date <%= currentDate %>
+        </h1>
+        <div class="notes-container">
+            <!-- Starred Notes Section -->
+            <h2 class="starornot">⭐ Starred Notes</h2>
+            <div class="notes">
+                <% data.forEach((note)=> { %>
+                    <% if (note.starred) { %>
+                        <div class="note" style="background-color: <%= note.color %>;">
+                            <div class="note-content">
+                                <div class="note-header">
+                                    <h2 class="note-title">
+                                        <%= note.title %>
+                                    </h2>
+                                    <!-- <label for="note-<%= note.id %>">Done?</label> -->
+                                    
+                                </div>
+                                <p class="note-body">
+                                    <%= note.body %>
+                                </p>
+                                <p class="timestamp">Last updated: <%= note.updatedAt %>
+                                </p>
+                                <form action="/edit/<%= note.id %>" method="GET" style="display: inline;">
+                                    <button type="submit" class="edit-button">Edit</button>
+                                </form>
+                                <form action="/unstar/<%= note.id %>" method="POST" style="display: inline;">
+                                    <button type="submit" class="star-button">Un-Star</button>
+                                </form>
+                                <form action="/delete/<%= note.id %>" method="POST" style="display: inline;">
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                                <!-- <button class="edit-button" >Edit</button> -->
+                            </div>
+                        </div>
+                        <% } %>
+                            <% }) %>
+            </div>
+
+            <!-- Regular Notes Section -->
+            <h2 class="starornot">📌 Other Notes</h2>
+            <div class="notes">
+                <% data.forEach((note)=> { %>
+                    <% if (!note.starred) { %>
+                        <div class="note" style="background-color: <%= note.color %>;">
+                            <div class="note-content">
+                                <div class="note-header">
+                                    <h2 class="note-title">
+                                        <%= note.title %>
+                                    </h2>
+                                    <!-- <label for="note-<%= note.id %>">Done?</label> -->
+                                    
+                                </div>
+                                <p class="note-body">
+                                    <%= note.body %>
+                                </p>
+                                <p class="timestamp">Last updated: <%= note.updatedAt %>
+                                </p>
+                                <form action="/edit/<%= note.id %>" method="GET" style="display: inline;">
+                                    <button type="submit" class="edit-button">Edit</button>
+                                </form>
+                                <form action="/star/<%= note.id %>" method="POST" style="display: inline;">
+                                    <button type="submit" class="star-button">Star</button>
+                                </form>
+                                <form action="/delete/<%= note.id %>" method="POST" style="display: inline;">
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% }) %>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const notes = JSON.parse(localStorage.getItem('notes')) || [];
+                console.log('Loaded notes from local storage:', notes);
+                // You can dynamically render notes here if needed
+            });
+        </script>
+    </body>
+
+    </html>

@@ -1,0 +1,42 @@
+<%- include('layout'); %>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/index.css">
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li><a class='active' href="/">Home</a></li>
+        <li><a href="/mylist">Notes</a></li>
+        <li><a href="/additem">New Note</a></li>
+        <li><a href="/oldlist">Old Notes</a></li>
+      </ul>
+    </nav>
+    <h1>For all your note-taking needs!</h1>
+    <h2>Today's Date: <%= currentDate %></h2>
+
+    <form action="/search" method="GET">
+      <div class="search-container">
+        <input type="text" name="query" placeholder="Search notes..." />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+    <div class="notes">
+      <% data.forEach((note) => { %>
+          <div class="note" style="background-color: <%= note.color %>;">
+              <div class="note-content">
+                  <div class="note-header">
+                      <h2 class="note-title"><%= note.title %></h2>
+                      
+                  </div>
+                  <p class="note-body"><%= note.body %></p>
+                  <p class="timestamp">Last updated: <%= note.updatedAt %></p>
+              </div>
+          </div>
+      <% }) %>
+  </div>
+  </body>
+
+  </html>
