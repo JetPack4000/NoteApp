@@ -12,7 +12,7 @@ h1 {
     color: white;
 }
 .notes {
-    display: flex;
+    /* display: flex; */
     /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); Responsive grid */
     gap: 20px;
     padding: 20px; 
