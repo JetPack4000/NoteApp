@@ -12,11 +12,11 @@ h1 {
     color: white;
 }
 .notes {
-    /* display: flex; */
-    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); Responsive grid */
+    display: flex;
+    grid-template-columns: repeat(4,1fr); 
     gap: 20px;
     padding: 20px; 
-    padding-bottom: 10px;;
+    /* padding-bottom: 10px;; */
  }
 
 
@@ -137,7 +137,15 @@ h1 {
 }
 
 /* Responsive Navbar (for mobile screens) */
+@media (max-width: 1024px) {
+    .notes {
+        grid-template-columns: repeat(3, 1fr); /* 3 notes per row for tablets */
+    }
+}
 @media (max-width: 768px) {
+    .notes {
+        grid-template-columns: repeat(2, 1fr); /* 2 notes per row for smaller tablets */
+    }
     .note {
         width: 100%;
         padding: 10px;
@@ -170,6 +178,9 @@ h1 {
     }
 }
 @media (max-width: 480px) {
+    .notes {
+        grid-template-columns: 1fr; /* 1 note per row for mobile devices */
+    }
     .note {
         padding: 8px;
     }
